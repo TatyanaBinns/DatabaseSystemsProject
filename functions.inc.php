@@ -42,22 +42,14 @@ function emailExists($conn, $email)
 
     $resultData = mysqli_stmt_get_result($stmt);
 
-
     // if theres is info in the data base with this email grab data 
     // assigns data to var row
     if ($row = mysqli_fetch_assoc($resultData))
-    {
         return $row;
-    }
     else 
-    {
-        $result = false;
-
-        return $result;
-    }
-
+    	return false;
+    
     mysqli_stmt_close($stmt);
-
 }
 
 
