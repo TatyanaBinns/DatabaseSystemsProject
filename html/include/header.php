@@ -28,7 +28,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/include/sql.php';
           if (isset($_SESSION["fname"]))
           {
             echo "<a class='btn btn-outline-primary' href='profile.php'>Profile</a>";
-            echo "<a class='btn btn-outline-primary' href='logout.inc.php'>Logout</a>";
+            echo "<a class='btn btn-outline-primary' href='logout.form.php'>Logout</a>";
           }
           else 
           {
