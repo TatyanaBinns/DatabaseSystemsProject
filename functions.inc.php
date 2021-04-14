@@ -1,24 +1,18 @@
 <?php 
-
 function emptyInputsRegister($fname, $lname, $email, $phone, $universityid, $password_1, $password_2)
 {
 	return empty($fname) || empty($lname) || empty($email) || empty($phone) || empty($universityid) || empty($password_1) || empty($password_2);
 }
-
-
 
 function invalidEmail($email)
 {
 	return !filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-
 function pwdMatch($password_1, $password_2)
 {
 	return $password_1 !== $password_2;
 }
-
-
 
 function emailExists($conn, $email)
 {
@@ -52,9 +46,6 @@ function emailExists($conn, $email)
     mysqli_stmt_close($stmt);
 }
 
-
-
-
 function createUser($conn, $fname, $lname, $email, $phone, $universityid, $password_1)
 {
     $sql = "INSERT INTO Users (FirstName, LastName, Email, PasswordHash, PhoneNumber, UniversityID) VALUES (?, ?, ?, ?, ?, ?);";
@@ -81,64 +72,39 @@ function createUser($conn, $fname, $lname, $email, $phone, $universityid, $passw
 
     header("location: register.php?error=none");
     exit();
-
-
-
 }
-
 
 function emptyInputsLogin($email, $password_1)
 {
-    $result;
-
-    if (empty($email) || empty($password_1))
-    {
-        $result = true;
-    }
-
-    else 
-    {
-        $result = false;
-    }
-
-    return $result;
-
+	return empty($email) || empty($password_1);
 }
-
-
 
 function loginUser($conn, $email, $password_1)
 {
-    $emailExists = emailExists($conn, $email);
+    $userdata = emailExists($conn, $email);
 
     // if false the email is not in the database 
-    if($emailExists === false)
+    if($userdata === false)
     {
         header("location: login.php?error=wrongcredentials");
         exit();
     }
 
-    // now check the pwd if emai is in databse 
-    $pwdHashed = $emailExists["PasswordHash"];
-
+    // now check the pwd if email is in databse 
     //if match return true else false
-    $checkPwd = password_verify($password_1, $pwdHashed);
-
-    if ($checkPwd === false )
+    if (!password_verify($password_1, $userdata["PasswordHash"]))
     {
         header("location: login.php?error=wrongcredentials");
         exit();
     }
-    else if ($checkPwd === true)
+    else
     {
         session_start();
 
-        $_SESSION["userid"] = $emailExists["UserID"];
-        $_SESSION["fname"] = $emailExists["FirstName"];
+        $_SESSION["userid"] = $userdata["UserID"];
+        $_SESSION["fname"] = $userdata["FirstName"];
 
         header("location: index.php");
         exit();
-        
     }
-
 }
