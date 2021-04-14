@@ -2,56 +2,20 @@
 
 function emptyInputsRegister($fname, $lname, $email, $phone, $universityid, $password_1, $password_2)
 {
-    $result;
-
-    if (empty($fname) || empty($lname) || empty($email) || empty($phone) || empty($universityid) || empty($password_1) || empty($password_2))
-    {
-        $result = true;
-    }
-
-    else 
-    {
-        $result = false;
-    }
-
-    return $result;
+	return empty($fname) || empty($lname) || empty($email) || empty($phone) || empty($universityid) || empty($password_1) || empty($password_2);
 }
 
 
 
 function invalidEmail($email)
 {
-    $result;
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL))
-    {
-        $result = true;
-    }
-
-    else 
-    {
-        $result = false;
-    }
-
-    return $result;
+	return !filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
 
 function pwdMatch($password_1, $password_2)
 {
-    $result;
-
-    if ($password_1 !== $password_2)
-    {
-        $result = true;
-    }
-
-    else 
-    {
-        $result = false;
-    }
-
-    return $result;
+	return $password_1 !== $password_2;
 }
 
 
