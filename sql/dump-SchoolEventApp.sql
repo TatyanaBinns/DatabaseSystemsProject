@@ -66,16 +66,15 @@ CREATE TABLE `Events` (
   `ContactEmailAddr` varchar(100) DEFAULT NULL,
   `LatLon` point DEFAULT NULL,
   `AddressDesc` varchar(100) DEFAULT NULL,
-  `Created` varchar(100) DEFAULT NULL,
-  `Scheduled` varchar(100) DEFAULT NULL,
+  `Created` datetime DEFAULT NULL,
+  `Scheduled` datetime DEFAULT NULL,
   PRIMARY KEY (`EventID`),
   KEY `Events_FK` (`CreatorUserID`),
   KEY `Events_FK_1` (`UniversityID`),
   KEY `Events_FK_2` (`OrgID`),
   CONSTRAINT `Events_FK` FOREIGN KEY (`CreatorUserID`) REFERENCES `Users` (`UserID`),
-  CONSTRAINT `Events_FK_1` FOREIGN KEY (`UniversityID`) REFERENCES `University` (`UniversityID`),
-  CONSTRAINT `Events_FK_2` FOREIGN KEY (`OrgID`) REFERENCES `RStudentOrg` (`OrgID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `Events_FK_1` FOREIGN KEY (`UniversityID`) REFERENCES `University` (`UniversityID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,6 +83,7 @@ CREATE TABLE `Events` (
 
 LOCK TABLES `Events` WRITE;
 /*!40000 ALTER TABLE `Events` DISABLE KEYS */;
+INSERT INTO `Events` VALUES (1,'Public',1,'TestCategory','Ice Fishing',2,1,NULL,'Ted Testie','(555) 867-5309','ted@brrr.edu','\0\0\0\0\0\0\0±’œâ¿ÆS¿,¯	E≥cF¿','You\'ll see the hut!','2021-04-14 05:49:26','2021-04-21 05:49:26');
 /*!40000 ALTER TABLE `Events` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +214,7 @@ CREATE TABLE `University` (
   `Description` varchar(900) DEFAULT NULL,
   `Domain` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`UniversityID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -223,6 +223,7 @@ CREATE TABLE `University` (
 
 LOCK TABLES `University` WRITE;
 /*!40000 ALTER TABLE `University` DISABLE KEYS */;
+INSERT INTO `University` VALUES (1,'Example University','\0\0\0\0\0\0\0=dH.ŒÀS¿ê∏≤´H¿','A great place to live!','@brrr.edu');
 /*!40000 ALTER TABLE `University` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,4 +270,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-14  1:06:15
+-- Dump completed on 2021-04-14  2:46:35
