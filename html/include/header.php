@@ -9,6 +9,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/include/sql.php';
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/lib/bootstrap.min.css">
+    <meta name="Description" content="<?php echo $descr ?>">
 
     <title><?php echo $title ?></title>
   </head>
