@@ -19,7 +19,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
 <div class = "container mt-5">
 
 
-    <form action="login.inc.php" method= "post">
+    <form action="login.form.php" method= "post">
 
 
         <div class="row mb-3 justify-content-md-center">
