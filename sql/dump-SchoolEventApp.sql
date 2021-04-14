@@ -235,15 +235,15 @@ DROP TABLE IF EXISTS `Users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Users` (
   `UserID` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(100) DEFAULT NULL,
   `Email` varchar(100) DEFAULT NULL,
   `PasswordHash` varchar(100) DEFAULT NULL,
   `PhoneNumber` varchar(100) DEFAULT NULL,
   `UniversityID` int(11) DEFAULT NULL,
+  `FirstName` varchar(100) DEFAULT NULL,
+  `LastName` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`UserID`),
-  KEY `Users_FK` (`UniversityID`),
-  CONSTRAINT `Users_FK` FOREIGN KEY (`UniversityID`) REFERENCES `University` (`UniversityID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY `Users_FK` (`UniversityID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,6 +252,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
+INSERT INTO `Users` VALUES (2,'test@testie.com','12345','(123) 456-7890',0,NULL,NULL);
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,4 +269,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-30  0:53:24
+-- Dump completed on 2021-04-14  1:06:15
