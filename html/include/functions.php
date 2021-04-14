@@ -104,7 +104,7 @@ function loginUser($conn, $email, $password_1)
         $_SESSION["userid"] = $userdata["UserID"];
         $_SESSION["fname"] = $userdata["FirstName"];
 
-        header("location: index.php");
+        header("location: index.php?error=none");
         exit();
     }
 }
