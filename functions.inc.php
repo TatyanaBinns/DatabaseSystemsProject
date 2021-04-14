@@ -57,7 +57,7 @@ function emailExists($conn, $email)
 
 function createUser($conn, $fname, $lname, $email, $phone, $universityid, $password_1)
 {
-    $sql = "INSERT INTO users (FirstName, LastName, Email, PasswordHash, PhoneNumber, UniversityID) VALUES (?, ?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO Users (FirstName, LastName, Email, PasswordHash, PhoneNumber, UniversityID) VALUES (?, ?, ?, ?, ?, ?);";
 
     // prevents the user from entering malicious code into the registration form
     // prevents code injection
