@@ -22,7 +22,7 @@ function pwdMatch($password_1, $password_2)
 
 function emailExists($conn, $email)
 {
-    $sql = "SELECT * FROM users WHERE Email = ?;";
+    $sql = "SELECT * FROM Users WHERE Email = ?;";
 
     // prevents the user from entering malicious code into the registration form
     // prevents code injection
