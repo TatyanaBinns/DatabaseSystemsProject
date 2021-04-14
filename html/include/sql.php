@@ -3,8 +3,8 @@ $hostname = "localhost";
 $username = "webuser";
 $password = "e3p6ihg93tgj5u97jhcghlkmgrti90bo";
 $db = "SchoolEventApp";
-$dbconnect=mysqli_connect($hostname,$username,$password,$db);
-if ($dbconnect->connect_error) {
-  die("Database connection failed: " . $dbconnect->connect_error);
+$dbconn=mysqli_connect($hostname,$username,$password,$db);
+if ($dbconn->connect_error) {
+  die("Database connection failed: " . $dbconn->connect_error);
 }
 ?>
