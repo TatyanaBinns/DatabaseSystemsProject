@@ -1,6 +1,6 @@
 <?php
-$title="BS ExamplePage";
-$descr="Example Bootstrap Page for Learning Bootstrap";
+$title="Events - Home";
+$descr="School Event Application Home Page";
 include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
 ?>
     <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
