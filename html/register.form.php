@@ -1,6 +1,7 @@
 <?php
+var_dump($_POST);
 
-if (isset($_POST["registerUser"]))
+if (isset($_POST["actionType"]) && $_POST["actionType"] == "registerUser")
 {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
@@ -10,33 +11,33 @@ if (isset($_POST["registerUser"]))
     $password_1 = $_POST['password_1'];
     $password_2 = $_POST['password_2'];
 
-    require_once 'dbh.inc.php';
-    require_once 'functions.inc.php';
-
+    require $_SERVER['DOCUMENT_ROOT'].'/include/sql.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/include/functions.php';
+	
     //catch any sort of errors 
 
     // if its true then there was an error inside the code
     // if false then there was no erros inside the code
 
-    if (emptyInputsRegister($fname, $lname, $email, $phone, $universityid, $password_1, $password_2) !== false )
+    if (emptyInputsRegister($fname, $lname, $email, $phone, $universityid, $password_1, $password_2))
     {
         header("location: register.php?error=emptyinput");
         exit();
     }
 
-    if (invalidEmail($email) !== false)
+    if (invalidEmail($email))
     {
         header("location: register.php?error=invalidemail");
         exit();
     }
 
-    if (pwdMatch($password_1, $password_2) !== false)
+    if (pwdMatch($password_1, $password_2))
     {
         header("location: register.php?error=pwdsdontmatch");
         exit();
     }
 
-    if (emailExists($conn, $email) !== false)
+    if (emailExists($conn, $email))
     {
         header("location: register.php?error=emailexists");
         exit();
@@ -54,6 +55,6 @@ if (isset($_POST["registerUser"]))
 }
 else
 {
-    header("location: register.php");
-    exit();
+    //header("location: register.php");
+    //exit();
 }
