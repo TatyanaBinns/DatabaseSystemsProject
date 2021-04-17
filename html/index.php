@@ -1,58 +1,82 @@
-<?php
-$title="Events - Home";
-$descr="School Event Application Home Page";
-include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
-?>
-    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">University Events</h1>
-      <p class="lead">Easily search untold universities for events, create your own, and run your Registered Student Organization events more easily!</p>
-    </div>
+<html>
 
-    <div class="container">
-      <div class="card-columns mb-3 text-center">
-        <?php
-            $query = mysqli_query($dbconn, 'SELECT 
-					e.EventID as "EventID",
-					e.Category as "EventCategory",
-					e.Name as "EventName",
-					e.ContactName as "Coordinator",
-					e.ContactPhoneNumber as "CoordinatorNumber",
-					e.ContactEmailAddr as "CoordinatorEmail",
-					e.AddressDesc as "Where",
-					e.Scheduled as "When",
-					u.Name as "University",
-					ro.Name as "Org"
-				FROM SchoolEventApp.Events e
-				JOIN University u on u.UniversityID = e.UniversityID
-				LEFT JOIN RStudentOrg ro on ro.OrgID = e.OrgID 
-				WHERE e.EventVisibility = "Public" AND e.Published = 1;')
-                or die (mysqli_error($dbconn));
+<head>
+<title>Event Creator</title>
+<head>
+<body>
 
-            while ($row = mysqli_fetch_array($query)) {
-				
-                echo '<div class="card shadow-sm">
-                        <div class="card-header">
-                          <h4 class="my-0 font-weight-normal">Organized at '.$row['University'].'</h4>
-                        </div>
-                        <div class="card-body">
-                          <h1 class="card-title pricing-card-title">'.$row['EventName'].'</h1>
-						  '.$row['Where'].' at '.$row['When'].'
-                          <a href="mailto:'.$row['CoordinatorEmail'].'" class="btn btn-lg btn-block btn-outline-primary">Contact '.$row['Coordinator'].'!</a>
-                        </div>
-                      </div>
-                      ';
-            }
-        ?>
-      </div>
+<form>
+	<center>
+	<h1>Event Creator</h1>
+	<h2>Have an event? Then submit it, right here! :D</h2>
+	<hr/>
+	<div>
+	 Name of the Event: <input name = "name" type = "text">
+	 </div>
+	
+	
+	<label > Enter a date: </label>
+	<select name = "month">
+		<option>Month</option>
+		<option value "January">January</option>
+		<option value "Feburary">Feburary</option>
+		<option value "March">March</option>
+		<option value "Apirl">Apirl</option>
+		<option value "May">May</option>
+		<option value "June">June</option>
+		<option value "July">July</option>
+		<option value "August">August</option>
+		<option value "September">September</option>
+		<option value "October">October</option>
+		<option value "November">November</option>
+		<option value "December">December</option>
+	</select>
+	
+	<select name = "Day">
+		<option>Day</option>
+		<option value "1">1</option>
+		<option value "2">2</option>
+		<option value "3">3</option>
+		<option value "4">4</option>
+		<option value "5">5</option>
+		<option value "6">6</option>
+		<option value "7">7</option>
+		<option value "8">8</option>
+		<option value "9">9</option>
+		<option value "10">10</option>
+		<option value "11">11</option>
+		<option value "12">12</option>
+		<option value "13">13</option>
+		<option value "14">14</option>
+		<option value "15">15</option>
+		<option value "16">16</option>
+		<option value "17">17</option>
+		<option value "18">18</option>
+		<option value "19">19</option>
+		<option value "20">20</option>
+		<option value "21">21</option>
+		<option value "22">22</option>
+		<option value "23">23</option>
+		<option value "24">24</option>
+		<option value "25">25</option>
+		<option value "26">26</option>
+		<option value "27">27</option>
+		<option value "28">28</option>
+		<option value "29">29</option>
+		<option value "30">30</option>
+		<option value "31">31</option>
+	</select>
+	
+	
+	<select name = "year">
+		<option>Year</option>
+		<option value "2021">2021</option>
+		<option value "2022">2022</option>
+		
+	</select>
+	
+	
+</form>
 
-      <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <div class="row">
-          <div class="col-12 col-md">
-            <h5>COP 4710 Term Project</h5>
-          </div>
-        </div>
-      </footer>
-    </div>
-<?php
-include $_SERVER['DOCUMENT_ROOT'].'/include/footer.php';
-?>
+</body>
+</html>
