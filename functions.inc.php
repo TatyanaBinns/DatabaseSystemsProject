@@ -179,6 +179,7 @@ function loginUser($conn, $email, $password_1)
 
         $_SESSION["userid"] = $emailExists["UserID"];
         $_SESSION["fname"] = $emailExists["FirstName"];
+        $_SESSION["email"] = $emailExists["Email"];
 
         header("location: index.php");
         exit();
@@ -186,3 +187,164 @@ function loginUser($conn, $email, $password_1)
     }
 
 }
+
+// createRSO
+function emptyInputsRSO($rsoname, $adminemail, $mem1, $mem2, $mem3, $mem4, $mem5, $uniID)
+{
+    $result;
+
+    if (empty($rsoname) || empty($adminemail) || empty($mem1) || empty($mem2) || empty($mem3) || empty($mem4) || empty($mem5) || empty($uniID))
+    {
+        $result = true;
+    }
+
+    else 
+    {
+        $result = false;
+    }
+
+    return $result;
+}
+
+function invalidEmailDomain($email)
+{
+    // idk
+    $result;
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+    {
+        $result = true;
+    }
+
+    else 
+    {
+        $result = false;
+    }
+
+    return $result;
+}
+
+function createRSO($conn, $rsoname, $adminemail, $mem1, $mem2, $mem3, $mem4, $mem5, $uniID)
+{
+    $sql = "INSERT INTO rso (rsoName, universityID, adEmail) VALUES (?, ?, ?);";
+    $sql_2 = "INSERT INTO rso_members (rsoName, membEmail) VALUES (?, ?);";
+
+    $stmt = mysqli_stmt_init($conn); // this makes code more secure
+
+    // check for any mistakes before running sql code 
+    if (!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: createRSO.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sss", $rsoname, $uniID, $adminemail);
+
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $sql_2))
+    {
+        header("location: createRSO.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $rsoname, $mem1);
+
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_bind_param($stmt, "ss", $rsoname, $mem2);
+
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_bind_param($stmt, "ss", $rsoname, $mem3);
+
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_bind_param($stmt, "ss", $rsoname, $mem4);
+
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_bind_param($stmt, "ss", $rsoname, $mem5);
+
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
+    header("location: createRSO.php?error=none");
+    exit();
+}
+
+function checkIfAdmin($conn, $email)
+{
+    $sql = "SELECT * FROM admins WHERE Email = ?;";
+
+    // prevents the user from entering malicious code into the registration form
+    // prevents code injection
+    $stmt = mysqli_stmt_init($conn); // this makes code more secure
+
+    // check for any mistakes before running sql code 
+    if (!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: index.php?error=stmtfailed");
+        exit();
+    }
+    
+    mysqli_stmt_bind_param($stmt, "s", $email);
+
+    mysqli_stmt_execute($stmt);
+
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+
+    // if theres is info in the data base with this email grab data 
+    // assigns data to var row
+    if ($row = mysqli_fetch_assoc($resultData))
+    {
+        return $row;
+    }
+    else 
+    {
+        $result = false;
+
+        return $result;
+    }
+
+    mysqli_stmt_close($stmt);
+
+}
+
+
+
+// create event
+function createEvent($conn, $ename, $ecategory, $edescription, $etime, $edate, $ecnumber, $ecemail, $etype)
+{
+    $sql = "INSERT INTO events (eName, eCategory, eDescription, eTime, eDate, eContctNumber, eContctEmail, eType) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+
+    // prevents the user from entering malicious code into the registration form
+    // prevents code injection
+    $stmt = mysqli_stmt_init($conn); // this makes code more secure
+
+    // check for any mistakes before running sql code 
+    if (!mysqli_stmt_prepare($stmt, $sql))
+    {
+        header("location: createEvents.php?error=stmtfailed");
+        exit();
+    }
+
+    
+    mysqli_stmt_bind_param($stmt, "ssssssss", $ename, $ecategory, $edescription, $etime, $edate, $ecnumber, $ecemail, $etype);
+
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
+    header("location: register.php?error=none");
+    exit();
+
+}
+
