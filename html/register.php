@@ -3,7 +3,7 @@ $title="Events - Register Account";
 $descr="School Event Application User Registration Page";
 include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
 ?>
-	<div class="text-center">
+	<div class="container col-md-4 text-center">
 		<form class="form-signin" action="register.form.php" method= "post">
 		  <h1 class="h3 mb-3 font-weight-normal">School Event App</h1>
 		  <h1 class="h3 mb-3 font-weight-normal">Register an Account</h1>
@@ -14,8 +14,8 @@ include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
 	// type is what the input type will be set as
     function writeInput($id, $placeholder, $name, $type){
 		echo '
-		    <label for="'.$id.'" class="sr-only">'.$placeholder.'</label>
-			<input type="'.$type.'" id="'.$id.'" class="form-control" placeholder="'.$placeholder.'" name="'.$name.'" required autofocus>';
+		  <label for="'.$id.'" class="sr-only">'.$placeholder.'</label>
+		  <input type="'.$type.'" id="'.$id.'" class="form-control" placeholder="'.$placeholder.'" name="'.$name.'" required autofocus>';
 	}
 	writeInput("firstName", "First Name", "fname", "text");
 	writeInput("lastName", "Last Name", "lname", "text");
@@ -25,7 +25,8 @@ include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
 	writeInput("password_2", "Confirm Password", "password_2", "password");
 	//TO DO: Confirm the passwords are the same
   ?>
-		  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		  <input type="hidden" name="actionType" value="registerUser">
+		  <button class="btn btn-lg btn-primary btn-block" type="submit">Register Account!</button>
 		  <p class="mt-5 mb-3">Already a user? <a href="login.php">Login!</a></p>
 		</form>
     </div>
