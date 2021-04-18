@@ -1,6 +1,14 @@
 <?php
 session_start();
 include $_SERVER['DOCUMENT_ROOT'].'/shared/sql.php';
+function printError($message, $type){
+	echo '<div class="alert alert-'.$type.' alert-dismissible fade show" role="alert">
+			'.$message.'
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>';
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -30,7 +38,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/shared/sql.php';
           else 
           {
             echo "<a class='btn btn-outline-secondary sea-enboldener ' href='register.php'>Register</a>";
-            echo "<a class='btn btn-outline-secondary sea-enboldener' href='login.php'>Log in</a>";
+            echo "<a class='btn btn-outline-secondary sea-enboldener' href='login.php'>Login</a>";
           }
         ?>
 	  </div>
