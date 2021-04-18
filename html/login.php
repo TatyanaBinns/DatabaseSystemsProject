@@ -11,7 +11,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
     if (isset($_GET["error"]))
     {
         if ($_GET["error"] == "emptyinput")
-            printError("<p id='err'>Please fill in all the fields!", "secondary");
+            printError("Please fill in all the fields!", "secondary");
         else if ($_GET["error"] == "wrongcredentials")
             printError("Invalid credentials!", "warning");
         else if ($_GET["error"] == "none")
