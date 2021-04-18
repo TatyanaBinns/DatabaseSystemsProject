@@ -1,7 +1,4 @@
 <?php
-
-var_dump($_POST);
-
 function res($msg){
 	header("location: create_university.php?result=$msg");
 	exit();

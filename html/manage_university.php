@@ -1,20 +1,19 @@
 <?php
-$title="Events - Create University";
-$descr="School Event Application University Creation Page";
+$title="Events - Management University";
+$descr="School Event Application University Management Page";
 $navitem="";
 include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
 ?>
 
-<?php 
+<div class="container">
+<?php
 	if (isset($_GET["result"]))
 		switch($_GET["result"]){
-			case "internalerror": 	printError("Internal Error!", "danger"); 			break;
-			case "invalid": 		printError("Invalid Request!", "warning"); 			break;
-			case "badloc": 			printError("Please select a location!", "warning"); break;
-			case "success": 		printError("University Created!", "success"); 		break;
+			case "internalerror": 	printError("Internal Error!", "danger"); 	break;
+			case "invalid": 		printError("Invalid Request!", "warning"); 	break;
+			case "success": 		printError("Admin Changed!", "success"); 	break;
 		}
 ?>
-<div class="container">
 	<table class="table">
 		<thead class="thead-light">
 			<tr>
@@ -26,7 +25,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
 		</thead>
 	<tbody>
 <?php
-$query = mysqli_query($dbconn, 'SELECT u.UniversityID, u.Name , u.`Domain` , 
+$query = mysqli_query($dbconn, 'SELECT u.UniversityID, u.Name , u.`Domain` , u.AdminID, 
 								CONCAT(u2.FirstName, " ", u2.LastName) AS adminname
 								FROM University u
 								JOIN Users u2 
@@ -37,7 +36,7 @@ $query = mysqli_query($dbconn, 'SELECT u.UniversityID, u.Name , u.`Domain` ,
 				  <th scope="row">'.$row['Name'].'</th>
 				  <td>'.$row['Domain'].'</td>
 				  <td>'.$row['adminname'].'</td>
-				  <td><button class="btn btn-sm btn-danger modUniButton" type="submit" data-value="'.$row['UniversityID'].'">Change Admin</button></td>
+				  <td><button class="btn btn-sm btn-danger modUniButton" type="submit" data-value="'.$row['UniversityID'].'" cur-admin="'.$row['AdminID'].'">Change Admin</button></td>
 				</tr>';
 ?>
 	  </tbody>
@@ -65,6 +64,7 @@ $query = mysqli_query($dbconn, 'SELECT u.UniversityID, u.Name , u.`Domain` ,
 			?>
 			</select>
 			<input type="hidden" name="universityId" id="uniId" value="">
+			<input type="hidden" name="actionType" value="changeUniversityAdmin">
 	  </div>
 	  <div class="modal-footer">
 		<button id="confirmChange" type="submid" class="btn btn-primary" >Confirm Admin</button>
@@ -77,6 +77,7 @@ $query = mysqli_query($dbconn, 'SELECT u.UniversityID, u.Name , u.`Domain` ,
 <script>
 	document.addEventListener("DOMContentLoaded", function(event) { 
 		$(".modUniButton").click(function (){
+			$("#uni_admin option[value='"+$(this).attr("cur-admin")+"']").prop('selected', true);
 			$('#uniId').val($(this).attr("data-value"));
 			$('#adminChanger').modal('show');
 		});
