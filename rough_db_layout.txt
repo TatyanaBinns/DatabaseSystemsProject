@@ -1,0 +1,74 @@
+#############################################
+#### NOTE: This is somewhat out of date  ####
+#### Please see the ER Diagram or better ####
+#### the .sql dump in:                   ####
+#### /sql/dump-SchoolEventApp.sql        ####
+#############################################
+
+Users
+(PK)-UserID 
+    -Name
+    -Email
+    -PasswordHash
+    -Phone Number
+    -UniversityID       (ForeignKey :: University), possibly NULL, so no foreign key constraint
+
+Roles
+(PK)-RoleID
+    -RoleType           {Public, Student, Admin, SuperAdmin, ApplicationAdmin}
+    -UserID             (ForeignKey :: Users)
+
+University
+(PK)-UniversityId
+    -Name
+    -Location
+    -Description
+    -Domain (eg, @knights.ucf.edu)
+    -Pictures?...
+
+RStudentOrg
+(PK)-OrgId
+    -AdminUserId        (ForeignKey :: Users)
+    -UniversityId       (ForeignKey :: University)
+    -Name
+    -Description
+    -Pictures?...
+    
+Membership
+(PK)-MembershipId
+    -UserID             (ForeignKey :: Users)
+    -OrgId              (ForeignKey :: RStudentOrg)
+
+Events
+(PK)-EventID
+    -EventVisibility    {Public, University, RStudentOrg}
+    -Published          {true/false}
+    -Category
+    -Name
+    -CreatorUserID      (ForeignKey :: Users)
+    -UniversityID       (ForeignKey :: University)
+    -OrgId              (ForeignKey :: RStudentOrg) (Possibly NULL)
+    -Contact Name
+    -Contact Phone Number
+    -Contact Email Addr
+    -LatLon             (Spatial Data Type, column def: ""`position` POINT NOT NULL SRID 4326""
+    -AddressDesc
+    -Created
+    -Scheduled
+
+//TODO: Repeated Events?
+
+Rating
+(PK)-RatingID
+    -EventID            (ForeignKey :: Events)
+    -UserID             (ForeignKey :: Users)
+    -Rating             {1..5}
+
+
+Comments
+(PK)-CommentID
+    -UserID             (ForeignKey :: Users)
+    -EventID            (ForeignKey :: Events)
+    -Timestamp
+    -Content
+    
