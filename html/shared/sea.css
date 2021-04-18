@@ -1,0 +1,29 @@
+.sea-enboldener{
+	font-weight: 700;
+}
+.sea-nav-link{
+	padding: .5rem;
+	font-weight: 700;
+	background-color: transparent;
+	border-bottom: .25rem solid transparent;
+	color: #808080;
+}
+.sea-nav-link:hover{
+	border-bottom-color: rgba(100, 100, 100, .25);
+	color: #555;
+	text-decoration: none;
+}
+.sea-nav-active{
+	color: #000;
+	border-bottom-color: rgba(255, 255, 255, .75);
+}
+.sea-nav-active:hover{
+	color: #555;
+	border-bottom-color: rgba(100, 100, 100, .25);
+}
+.sea-body{
+	background-color: #92929203;
+}
+.sea-nav{
+	background-color: #eaeaeae0!important
+}
