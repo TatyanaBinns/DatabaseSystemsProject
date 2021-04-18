@@ -1,6 +1,10 @@
 .sea-enboldener{
 	font-weight: 700;
 }
+.sea-username{
+	font-weight: 700;
+	padding: .5rem;
+}
 .sea-nav-link{
 	padding: .5rem;
 	font-weight: 700;
