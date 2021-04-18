@@ -82,12 +82,13 @@ function hasRole($conn, $role){
           if (isset($_SESSION["fname"]))
           {
 			echo '<div class="btn-group mr-2">';
-			if(hasRole($dbconn, "Admin"))
-				echo "<a class='btn btn-outline-secondary sea-enboldener' href='create_event.php'>Create Event</a>";
 			if(hasRole($dbconn, "SuperAdmin"))
+				echo "<a class='btn btn-outline-secondary sea-enboldener' href='approve_events.php'>Approve Public Events</a>";
+			if(hasRole($dbconn, "ApplicationAdmin"))
 				echo "<a class='btn btn-outline-secondary sea-enboldener' href='create_university.php'>Create University</a>";
 			if(hasRole($dbconn, "Student"))
 				echo "<a class='btn btn-outline-secondary sea-enboldener' href='create_rso.php'>Create Student Org</a>";
+			echo "<a class='btn btn-outline-secondary sea-enboldener' href='create_event.php'>Create Event</a>";
 			echo '</div>';
 			
 			echo '<div class="btn-group mr-2">';
