@@ -98,11 +98,12 @@ CREATE TABLE `Membership` (
   `MembershipID` int(11) NOT NULL AUTO_INCREMENT,
   `UserID` int(11) DEFAULT NULL,
   `OrgID` int(11) DEFAULT NULL,
+  `Accepted` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`MembershipID`),
   KEY `Membership_FK` (`UserID`),
   KEY `Membership_FK_1` (`OrgID`),
-  CONSTRAINT `Membership_FK` FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`),
-  CONSTRAINT `Membership_FK_1` FOREIGN KEY (`OrgID`) REFERENCES `RStudentOrg` (`OrgID`)
+  CONSTRAINT `Membership_FK` FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE,
+  CONSTRAINT `Membership_FK_1` FOREIGN KEY (`OrgID`) REFERENCES `RStudentOrg` (`OrgID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -187,8 +188,8 @@ CREATE TABLE `Roles` (
   `UserID` int(11) DEFAULT NULL,
   PRIMARY KEY (`RoleID`),
   KEY `Roles_FK` (`UserID`),
-  CONSTRAINT `Roles_FK` FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `Roles_FK` FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,6 +198,7 @@ CREATE TABLE `Roles` (
 
 LOCK TABLES `Roles` WRITE;
 /*!40000 ALTER TABLE `Roles` DISABLE KEYS */;
+INSERT INTO `Roles` VALUES (13,'Public',13),(14,'Student',13);
 /*!40000 ALTER TABLE `Roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +215,10 @@ CREATE TABLE `University` (
   `Location` point DEFAULT NULL,
   `Description` varchar(900) DEFAULT NULL,
   `Domain` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`UniversityID`)
+  `AdminID` int(11) NOT NULL,
+  PRIMARY KEY (`UniversityID`),
+  KEY `University_FK` (`AdminID`),
+  CONSTRAINT `University_FK` FOREIGN KEY (`AdminID`) REFERENCES `Users` (`UserID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -223,7 +228,7 @@ CREATE TABLE `University` (
 
 LOCK TABLES `University` WRITE;
 /*!40000 ALTER TABLE `University` DISABLE KEYS */;
-INSERT INTO `University` VALUES (1,'Example University','\0\0\0\0\0\0\0=dH.ŒÀS¿ê∏≤´H¿','A great place to live!','@brrr.edu');
+INSERT INTO `University` VALUES (1,'Example University','\0\0\0\0\0\0\0=dH.ŒÀS¿ê∏≤´H¿','A great place to live!','brrr.edu',13);
 /*!40000 ALTER TABLE `University` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +250,7 @@ CREATE TABLE `Users` (
   PRIMARY KEY (`UserID`),
   UNIQUE KEY `Users_UN` (`Email`),
   KEY `Users_FK` (`UniversityID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -254,7 +259,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (2,'test@testie.com','12345','(123) 456-7890',0,NULL,NULL),(3,'freddie@brrr.edu','$2y$10$YF63YyvtrNTG2xI65THxS.GNigEiHpTEhmwJEYG3LqUmB55hdO/zW','(555) 123-5678',NULL,'Fred','Von Struble'),(4,'thebman@gmail.com','$2y$10$InszeU/pJ1Ntex5PAVcBa.gKE/1fc/7uWYiJb9sFhV3rw1CeHq05G','(555) 444-5353',NULL,'Billy','Joel');
+INSERT INTO `Users` VALUES (2,'test@testie.com','12345','(123) 456-7890',0,NULL,NULL),(13,'joee@brrr.edu','$2y$10$x6UP/N96ZA3sAKtCl3VXR.yHeVfnAScEMUjNJh3rlEN4PmkWZJ8Ni','(555) 424-5253',1,'Joe','Eoj');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,4 +276,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-18  0:48:03
+-- Dump completed on 2021-04-18  2:00:59
