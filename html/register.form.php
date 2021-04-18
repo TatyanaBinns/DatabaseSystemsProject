@@ -7,7 +7,6 @@ if (isset($_POST["actionType"]) && $_POST["actionType"] == "registerUser")
     $lname = $_POST['lname'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
-    $universityid = $_POST['universityID'];
     $password_1 = $_POST['password_1'];
     $password_2 = $_POST['password_2'];
 
@@ -19,7 +18,7 @@ if (isset($_POST["actionType"]) && $_POST["actionType"] == "registerUser")
     // if its true then there was an error inside the code
     // if false then there was no erros inside the code
 
-    if (emptyInputsRegister($fname, $lname, $email, $phone, $universityid, $password_1, $password_2))
+    if (emptyInputsRegister($fname, $lname, $email, $phone, $password_1, $password_2))
     {
         header("location: register.php?error=emptyinput");
         exit();
