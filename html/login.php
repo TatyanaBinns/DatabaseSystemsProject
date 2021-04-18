@@ -41,7 +41,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
 	writeInput("inputEmail", "Email Address", "email", "email", "sea-square-top");
 	writeInput("password", "Password", "password_1", "password", "sea-square-bot");
   ?>
-		  <input type="hidden" name="actionType" value="registerUser">
+		  <input type="hidden" name="actionType" value="loginUser">
 		  <button class="btn btn-lg btn-primary btn-block" type="submit">Login!</button>
 		  <p class="mt-5 mb-3">Need an account? <a href="register.php">Register!</a></p>
 		</form>
