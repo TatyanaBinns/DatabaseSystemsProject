@@ -1,6 +1,7 @@
 <?php
 $title="Events - Home";
 $descr="School Event Application Home Page";
+$navitem="homepage";
 include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
 ?>
     <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -44,14 +45,6 @@ include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
             }
         ?>
       </div>
-
-      <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <div class="row">
-          <div class="col-12 col-md">
-            <h5>COP 4710 Term Project</h5>
-          </div>
-        </div>
-      </footer>
     </div>
 <?php
 include $_SERVER['DOCUMENT_ROOT'].'/include/footer.php';
