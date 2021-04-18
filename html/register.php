@@ -25,18 +25,6 @@ include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
         else if ($_GET["error"] == "none")
             printError("Registration complete! Log in above!", "success");
     }
-?>
-	<style>
-		.sea-square-top{
-			border-bottom-left-radius : 0;
-			border-bottom-right-radius : 0;
-		}
-		.sea-square-bot{
-			border-top-left-radius : 0;
-			border-top-right-radius : 0;
-		}
-	</style>
-  <?php 
     // id must be unique
 	// placeholder is what will be displayed
 	// name is what is passed to the target form
