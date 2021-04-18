@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST["loginUser"]))
+if (isset($_POST["actionType"]) && ($_POST["actionType"] == "loginUser"))
 {
     $email = $_POST['email'];
     $password_1 = $_POST['password_1'];
