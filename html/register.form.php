@@ -1,7 +1,5 @@
 <?php
-var_dump($_POST);
-
-if (isset($_POST["actionType"]) && $_POST["actionType"] == "registerUser")
+if (isset($_POST["actionType"]) && ($_POST["actionType"] == "registerUser"))
 {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
@@ -36,7 +34,7 @@ if (isset($_POST["actionType"]) && $_POST["actionType"] == "registerUser")
         exit();
     }
 
-    if (emailExists($conn, $email))
+    if (emailExists($dbconn, $email))
     {
         header("location: register.php?error=emailexists");
         exit();
@@ -48,7 +46,7 @@ if (isset($_POST["actionType"]) && $_POST["actionType"] == "registerUser")
     
 
     // if no errors are found create user 
-    createUser($conn, $fname, $lname, $email, $phone, $universityid, $password_1);
+    createUser($dbconn, $fname, $lname, $email, $phone, $password_1);
 
 
 }
