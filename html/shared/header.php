@@ -70,8 +70,8 @@ function hasRole($conn, $role){
   <body class='sea-body'>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 sea-nav border-bottom shadow-sm">
       <nav class="my-0 mr-md-auto font-weight-normal">
-        <a class="sea-nav-link <?php if ($navitem == "homepage") echo "active";?>" href="index.php">Home Page</a>
-        <a class="sea-nav-link <?php if ($navitem == "faq") echo "active";?>" href="faq.php">FAQ</a>
+        <a class="sea-nav-link <?php if ($navitem == "homepage") echo "active";?>" href="/index.php">Home Page</a>
+        <a class="sea-nav-link <?php if ($navitem == "faq") echo "active";?>" href="/faq.php">FAQ</a>
       </nav>
 	  <?php
 		if(isset($_SESSION["fname"])){
@@ -83,25 +83,27 @@ function hasRole($conn, $role){
           {
 			echo '<div class="btn-group mr-2">';
 			if(hasRole($dbconn, "SuperAdmin"))
-				echo "<a class='btn btn-outline-secondary sea-enboldener' href='approve_events.php'>Approve Public Events</a>";
+				echo "<a class='btn btn-outline-secondary sea-enboldener' href='/approve_events.php'>Approve Public Events</a>";
 			if(hasRole($dbconn, "ApplicationAdmin"))
-				echo "<a class='btn btn-outline-secondary sea-enboldener' href='create_university.php'>Create University</a>";
+				echo "<a class='btn btn-outline-secondary sea-enboldener' href='/create_university.php'>Create University</a>";
 			if(hasRole($dbconn, "Student"))
-				echo "<a class='btn btn-outline-secondary sea-enboldener' href='create_rso.php'>Create Student Org</a>";
-			echo "<a class='btn btn-outline-secondary sea-enboldener' href='create_event.php'>Create Event</a>";
+				echo "<a class='btn btn-outline-secondary sea-enboldener' href='/create_rso.php'>Create Student Org</a>";
+			echo "<a class='btn btn-outline-secondary sea-enboldener' href='/create_event.php'>Create Event</a>";
 			echo '</div>';
 			
 			echo '<div class="btn-group mr-2">';
-			if(hasRole($dbconn, "ApplicationAdmin"))
-				echo "<a class='btn btn-outline-secondary sea-enboldener' href='manage_users.php'>Manage Users</a>";
-            echo "<a class='btn btn-outline-secondary sea-enboldener' href='logout.form.php'>Logout</a>";
+			if(hasRole($dbconn, "ApplicationAdmin")){
+				echo "<a class='btn btn-outline-secondary sea-enboldener' href='/manage_university.php'>Manage Universities</a>";
+				echo "<a class='btn btn-outline-secondary sea-enboldener' href='/manage_users.php'>Manage Users</a>";
+			}
+            echo "<a class='btn btn-outline-secondary sea-enboldener' href='/logout.form.php'>Logout</a>";
 			echo '</div>';
           }
           else 
           {
 			echo '<div class="btn-group mr-2">';
-            echo "<a class='btn btn-outline-secondary sea-enboldener ' href='register.php'>Register</a>";
-            echo "<a class='btn btn-outline-secondary sea-enboldener' href='login.php'>Login</a>";
+            echo "<a class='btn btn-outline-secondary sea-enboldener ' href='/register.php'>Register</a>";
+            echo "<a class='btn btn-outline-secondary sea-enboldener' href='/login.php'>Login</a>";
 			echo '</div>';
           }
         ?>
