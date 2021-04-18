@@ -1,7 +1,7 @@
 <?php
 $title="Events - Login";
 $descr="Events Login Page";
-include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
+include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
 ?>
 
 <body style="background-color:#adb5bd;">
@@ -88,5 +88,5 @@ include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
 
 
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/include/footer.php';
+include $_SERVER['DOCUMENT_ROOT'].'/shared/footer.php';
 ?>

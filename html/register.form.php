@@ -10,8 +10,8 @@ if (isset($_POST["actionType"]) && $_POST["actionType"] == "registerUser")
     $password_1 = $_POST['password_1'];
     $password_2 = $_POST['password_2'];
 
-    require $_SERVER['DOCUMENT_ROOT'].'/include/sql.php';
-    require $_SERVER['DOCUMENT_ROOT'].'/include/functions.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/shared/sql.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/shared/functions.php';
 	
     //catch any sort of errors 
 

@@ -2,7 +2,7 @@
 $title="Events - Register Account";
 $descr="School Event Application User Registration Page";
 $navitem="";
-include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
+include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
 ?>
 	<div class="container col-md-4 text-center">
 		<form class="form-signin" action="register.form.php" method= "post">
@@ -71,6 +71,6 @@ include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
 
 
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/include/footer.php';
+include $_SERVER['DOCUMENT_ROOT'].'/shared/footer.php';
 ?>
 

@@ -2,7 +2,7 @@
 $title="Events - Home";
 $descr="School Event Application Home Page";
 $navitem="homepage";
-include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
+include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
 ?>
     <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <h1 class="display-4">University Events</h1>
@@ -38,7 +38,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
                         <div class="card-body">
                           <h1 class="card-title pricing-card-title">'.$row['EventName'].'</h1>
 						  '.$row['Where'].' at '.$row['When'].'
-                          <a href="mailto:'.$row['CoordinatorEmail'].'" class="btn btn-lg btn-block btn-outline-primary">Contact '.$row['Coordinator'].'!</a>
+                          <a href="mailto:'.$row['CoordinatorEmail'].'" class="btn btn-lg btn-block btn-outline-secondary">Contact '.$row['Coordinator'].'!</a>
                         </div>
                       </div>
                       ';
@@ -47,5 +47,5 @@ include $_SERVER['DOCUMENT_ROOT'].'/include/header.php';
       </div>
     </div>
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/include/footer.php';
+include $_SERVER['DOCUMENT_ROOT'].'/shared/footer.php';
 ?>

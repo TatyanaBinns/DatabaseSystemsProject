@@ -5,8 +5,8 @@ if (isset($_POST["loginUser"]))
     $email = $_POST['email'];
     $password_1 = $_POST['password_1'];
 
-    require $_SERVER['DOCUMENT_ROOT'].'/include/sql.php';
-    require $_SERVER['DOCUMENT_ROOT'].'/include/functions.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/shared/sql.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/shared/functions.php';
 
     //catch any sort of errors 
 
