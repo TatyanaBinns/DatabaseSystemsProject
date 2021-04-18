@@ -3,90 +3,49 @@ $title="Events - Login";
 $descr="Events Login Page";
 include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
 ?>
-
-<body style="background-color:#adb5bd;">
-
-
-<div class = "container">
-	<div class = "header mt-5">
-			<h2 class="display-5 text-center text-light">Log in</h2>
-			<p></p>
-			<p></p>   
-	</div>
-</div>
-
-
-<div class = "container mt-5">
-
-
-    <form action="login.form.php" method= "post">
-
-
-        <div class="row mb-3 justify-content-md-center">
-        <div class="col-md-6">
-            <input type="email" class="form-control" placeholder="Email" aria-label="Email" name = "email" required>   
-        </div>
-        </div>
-
-        <div class="row mb-3 justify-content-md-center">
-        <div class="col-md-6">
-            <input type="password" class="form-control" placeholder="Password" aria-label="Password" name = "password_1" required>   
-        </div>
-        </div>
-
-
-        <div class="row mb-3 text-center">
-        <div class="col">
-            <button type="submit" name="loginUser" class="btn btn-danger col-6 mt-3"> Log in </button>
-            </div>
-        </div>
-
-        <div class="row mb-3 text-center">
-            <p class="text-light">Not a user?<a href= "register.php"><b>  Register Here</b></a></p>
-        </div>
-    </form>
-</div>
-
-<style>
-#err {
-    align: center;
-    color: red;
-    font-size: 150%;
-    text-align: center;
-
-}
-
-#ok {
-    align: center;
-    color: green;
-    font-size: 150%;
-    text-align: center;
-
-}
-</style>
-
-
-
-<?php 
+<div class="container col-md-4 text-center">
+		<form class="form-signin" action="login.form.php" method= "post">
+		  <h1 class="h2 mb-3 font-weight-normal">School Event App</h1>
+<?php
     //$_GET[]  something you can see in the url
     if (isset($_GET["error"]))
     {
         if ($_GET["error"] == "emptyinput")
-        {
-            echo "<p id='err'>Fill in all fields!</p>";
-        }
+            printError("<p id='err'>Please fill in all the fields!", "secondary");
         else if ($_GET["error"] == "wrongcredentials")
-        {
-            echo "<p id='err'>Wrong credentials!</p>";
-        }
+            printError("Invalid credentials!", "warning");
         else if ($_GET["error"] == "none")
-        {
-            echo "<p id='ok'>Registration complete!</p>";
-        }
+            printError("Log-in Complete!", "success");
     }
 ?>
-
-
+	<style>
+		.sea-square-top{
+			border-bottom-left-radius : 0;
+			border-bottom-right-radius : 0;
+		}
+		.sea-square-bot{
+			border-top-left-radius : 0;
+			border-top-right-radius : 0;
+		}
+	</style>
+  <?php 
+    // id must be unique
+	// placeholder is what will be displayed
+	// name is what is passed to the target form
+	// type is what the input type will be set as
+    function writeInput($id, $placeholder, $name, $type, $xtraClasses){
+		echo '
+		  <label for="'.$id.'" class="sr-only">'.$placeholder.'</label>
+		  <input type="'.$type.'" id="'.$id.'" class="form-control '.$xtraClasses.'" placeholder="'.$placeholder.'" name="'.$name.'" required autofocus>';
+	}
+	writeInput("inputEmail", "Email Address", "email", "email", "sea-square-top");
+	writeInput("password", "Password", "password_1", "password", "sea-square-bot");
+  ?>
+		  <input type="hidden" name="actionType" value="registerUser">
+		  <button class="btn btn-lg btn-primary btn-block" type="submit">Login!</button>
+		  <p class="mt-5 mb-3">Need an account? <a href="register.php">Register!</a></p>
+		</form>
+    </div>
 <?php
 include $_SERVER['DOCUMENT_ROOT'].'/shared/footer.php';
 ?>
