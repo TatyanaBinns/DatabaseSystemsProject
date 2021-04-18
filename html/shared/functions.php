@@ -1,7 +1,7 @@
 <?php 
-function emptyInputsRegister($fname, $lname, $email, $phone, $universityid, $password_1, $password_2)
+function emptyInputsRegister($fname, $lname, $email, $phone, $password_1, $password_2)
 {
-	return empty($fname) || empty($lname) || empty($email) || empty($phone) || empty($universityid) || empty($password_1) || empty($password_2);
+	return empty($fname) || empty($lname) || empty($email) || empty($phone) || empty($password_1) || empty($password_2);
 }
 
 function invalidEmail($email)
@@ -46,9 +46,9 @@ function emailExists($conn, $email)
     mysqli_stmt_close($stmt);
 }
 
-function createUser($conn, $fname, $lname, $email, $phone, $universityid, $password_1)
+function createUser($conn, $fname, $lname, $email, $phone, $password_1)
 {
-    $sql = "INSERT INTO Users (FirstName, LastName, Email, PasswordHash, PhoneNumber, UniversityID) VALUES (?, ?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO Users (FirstName, LastName, Email, PasswordHash, PhoneNumber) VALUES (?, ?, ?, ?, ?);";
 
     // prevents the user from entering malicious code into the registration form
     // prevents code injection
@@ -64,7 +64,7 @@ function createUser($conn, $fname, $lname, $email, $phone, $universityid, $passw
     // hash password
     $hashedPwd = password_hash($password_1, PASSWORD_DEFAULT);
     
-    mysqli_stmt_bind_param($stmt, "ssssss", $fname, $lname, $email, $hashedPwd,  $phone, $universityid);
+    mysqli_stmt_bind_param($stmt, "sssss", $fname, $lname, $email, $hashedPwd,  $phone);
 
     mysqli_stmt_execute($stmt);
 
