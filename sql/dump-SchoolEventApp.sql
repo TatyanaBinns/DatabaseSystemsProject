@@ -243,8 +243,9 @@ CREATE TABLE `Users` (
   `FirstName` varchar(100) DEFAULT NULL,
   `LastName` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`UserID`),
+  UNIQUE KEY `Users_UN` (`Email`),
   KEY `Users_FK` (`UniversityID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,7 +254,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (2,'test@testie.com','12345','(123) 456-7890',0,NULL,NULL);
+INSERT INTO `Users` VALUES (2,'test@testie.com','12345','(123) 456-7890',0,NULL,NULL),(3,'freddie@brrr.edu','$2y$10$YF63YyvtrNTG2xI65THxS.GNigEiHpTEhmwJEYG3LqUmB55hdO/zW','(555) 123-5678',NULL,'Fred','Von Struble'),(4,'thebman@gmail.com','$2y$10$InszeU/pJ1Ntex5PAVcBa.gKE/1fc/7uWYiJb9sFhV3rw1CeHq05G','(555) 444-5353',NULL,'Billy','Joel');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,4 +271,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-14  2:46:35
+-- Dump completed on 2021-04-18  0:48:03
