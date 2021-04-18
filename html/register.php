@@ -9,29 +9,21 @@ include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
 		  <h1 class="h2 mb-3 font-weight-normal">School Event App</h1>
 		  <h1 class="h4 mb-3 font-weight-normal">Register an Account</h1>
 <?php 
-    function printError($message){
-		echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-			    '.$message.'
-			    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				  <span aria-hidden="true">&times;</span>
-			    </button>
-			  </div>';
-	}
     //$_GET[]  something you can see in the url
     if (isset($_GET["error"]))
     {
         if ($_GET["error"] == "emptyinput")
-            printError("<p id='err'>Please fill in all the fields!");
+            printError("Please fill in all the fields!", "warning");
         else if ($_GET["error"] == "invalidemail")
-            printError("Please supply a proper email!");
+            printError("Please supply a proper email!", "danger");
         else if ($_GET["error"] == "pwdsdontmatch")
-            printError("Error, Passwords doesn't match!");
+            printError("Error, Passwords doesn't match!", "warning");
         else if ($_GET["error"] == "emailexists")
-            printError("Email already registered!");
+            printError("Email already registered!", "danger");
         else if ($_GET["error"] == "stmtfailed")
-            printError("Something went wrong, try again!");
+            printError("Something went wrong, try again!", "info");
         else if ($_GET["error"] == "none")
-            printError("Registration complete! Log in above!");
+            printError("Registration complete! Log in above!", "success");
     }
 ?>
 	<style>
