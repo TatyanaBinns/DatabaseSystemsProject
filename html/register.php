@@ -31,7 +31,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
         else if ($_GET["error"] == "stmtfailed")
             printError("Something went wrong, try again!");
         else if ($_GET["error"] == "none")
-            printError("Registration complete! Sign in above!");
+            printError("Registration complete! Log in above!");
     }
 ?>
 	<style>
