@@ -39,38 +39,6 @@ function getUserInfo($conn){
     
 	return $row;
 }
-function hasRole($conn, $role){
-	$stmt = mysqli_stmt_init($conn); // this makes code more secure
-	switch($role){
-		case "SuperAdmin":
-			mysqli_stmt_prepare($stmt, 
-				   "SELECT IF(COUNT(*) > 0, 'true', 'false') AS hasRole
-					FROM University r
-					WHERE r.AdminID = ?;");
-			mysqli_stmt_bind_param($stmt, "i", $_SESSION["userid"]);
-		break;
-		case "Admin":
-			mysqli_stmt_prepare($stmt, 
-				   "SELECT IF(COUNT(*) > 0, 'true', 'false') AS hasRole
-					FROM RStudentOrg r
-					WHERE r.AdminUserID = ?;");
-			mysqli_stmt_bind_param($stmt, "i", $_SESSION["userid"]);
-		break;
-		default:
-			$stmt = mysqli_stmt_init($conn); // this makes code more secure
-			mysqli_stmt_prepare($stmt, 
-				   "SELECT IF(COUNT(RoleType) > 0, 'true', 'false') AS hasRole
-					FROM Roles r
-					WHERE r.UserID = ?
-					AND r.RoleType = ?;");
-			mysqli_stmt_bind_param($stmt, "is", $_SESSION["userid"], $role);
-		break;
-	}
-	mysqli_stmt_execute($stmt);
-	$row = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
-	mysqli_stmt_close($stmt);
-	return $row["hasRole"] == "true";
-}
 if(isset($reqRole) && !hasRole($dbconn, $reqRole)){
 	header( "location: /index.php");
 	exit();
@@ -111,7 +79,9 @@ if(isset($reqRole) && !hasRole($dbconn, $reqRole)){
 				echo "<a class='btn btn-outline-secondary sea-enboldener' href='/create_university.php'>Create University</a>";
 			if(hasRole($dbconn, "Student"))
 				echo "<a class='btn btn-outline-secondary sea-enboldener' href='/create_rso.php'>Create Student Org</a>";
-			echo "<a class='btn btn-outline-secondary sea-enboldener' href='/create_event.php'>Create Event</a>";
+			if(hasRole($dbconn, "Student") || hasRole($dbconn, "Admin") || hasRole($dbconn, "SuperAdmin"))
+				echo "<a class='btn btn-outline-secondary sea-enboldener' href='/create_event.php'>Create Event</a>";
+			
 			echo '</div>';
 			
 			echo '<div class="btn-group mr-2">';
