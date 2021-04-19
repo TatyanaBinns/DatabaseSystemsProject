@@ -2,6 +2,7 @@
 $title="Events - Create University";
 $descr="School Event Application University Creation Page";
 $navitem="";
+$reqRole="ApplicationAdmin";
 include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
 ?>
 	<div class="container col-md-4 text-center">

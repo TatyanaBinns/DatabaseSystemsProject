@@ -2,6 +2,7 @@
 $title="Events - Management University";
 $descr="School Event Application University Management Page";
 $navitem="";
+$reqRole="ApplicationAdmin";
 include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
 ?>
 
