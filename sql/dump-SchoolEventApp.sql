@@ -189,7 +189,7 @@ CREATE TABLE `Roles` (
   PRIMARY KEY (`RoleID`),
   KEY `Roles_FK` (`UserID`),
   CONSTRAINT `Roles_FK` FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +198,7 @@ CREATE TABLE `Roles` (
 
 LOCK TABLES `Roles` WRITE;
 /*!40000 ALTER TABLE `Roles` DISABLE KEYS */;
-INSERT INTO `Roles` VALUES (13,'Public',13),(14,'Student',13);
+INSERT INTO `Roles` VALUES (13,'Public',13),(14,'Student',13),(15,'Public',14),(16,'ApplicationAdmin',14),(17,'Public',15),(18,'Student',15),(19,'Public',16),(20,'Student',16),(21,'Public',17),(22,'Student',17),(23,'Public',18),(24,'Student',18),(25,'Public',19),(26,'Student',19),(27,'Public',20),(28,'Student',20),(29,'Public',21),(30,'Student',21),(31,'Public',22),(32,'Student',22),(33,'Public',23),(34,'Student',23),(35,'Public',24),(36,'Public',25),(37,'Student',25),(38,'Public',26),(39,'Student',26),(40,'Public',27),(41,'Student',27),(42,'Public',28),(43,'Student',28),(44,'Public',29),(45,'Student',29),(46,'Public',30),(47,'Student',30),(48,'Public',31),(49,'Student',31),(50,'Public',32),(51,'Student',32);
 /*!40000 ALTER TABLE `Roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,15 +211,17 @@ DROP TABLE IF EXISTS `University`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `University` (
   `UniversityID` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(100) DEFAULT NULL,
+  `Name` varchar(100) NOT NULL,
   `Location` point DEFAULT NULL,
   `Description` varchar(900) DEFAULT NULL,
-  `Domain` varchar(100) DEFAULT NULL,
+  `Domain` varchar(100) NOT NULL,
   `AdminID` int(11) NOT NULL,
   PRIMARY KEY (`UniversityID`),
+  UNIQUE KEY `University_UN` (`Name`),
+  UNIQUE KEY `University_UN2` (`Domain`),
   KEY `University_FK` (`AdminID`),
   CONSTRAINT `University_FK` FOREIGN KEY (`AdminID`) REFERENCES `Users` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -228,7 +230,7 @@ CREATE TABLE `University` (
 
 LOCK TABLES `University` WRITE;
 /*!40000 ALTER TABLE `University` DISABLE KEYS */;
-INSERT INTO `University` VALUES (1,'Example University','\0\0\0\0\0\0\0=dH.ŒÀS¿ê∏≤´H¿','A great place to live!','brrr.edu',13);
+INSERT INTO `University` VALUES (1,'Example University','\0\0\0\0\0\0\0=dH.ŒÀS¿ê∏≤´H¿','A great place to live!','brrr.edu',13),(8,'University of Central Florida','\0\0\0\0\0\0\0`º%ö<@b@úß”LT¿','test','knights.ucf.edu',16),(9,'Florida Tech','\0\0\0\0\0\0\0UÙz‘ú<@ƒÄÎÌ‚\'T¿','A private school','fit.edu',17);
 /*!40000 ALTER TABLE `University` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,7 +252,7 @@ CREATE TABLE `Users` (
   PRIMARY KEY (`UserID`),
   UNIQUE KEY `Users_UN` (`Email`),
   KEY `Users_FK` (`UniversityID`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,7 +261,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (2,'test@testie.com','12345','(123) 456-7890',0,NULL,NULL),(13,'joee@brrr.edu','$2y$10$x6UP/N96ZA3sAKtCl3VXR.yHeVfnAScEMUjNJh3rlEN4PmkWZJ8Ni','(555) 424-5253',1,'Joe','Eoj');
+INSERT INTO `Users` VALUES (2,'test@testie.com','12345','(123) 456-7890',0,NULL,NULL),(13,'joee@brrr.edu','$2y$10$x6UP/N96ZA3sAKtCl3VXR.yHeVfnAScEMUjNJh3rlEN4PmkWZJ8Ni','(555) 424-5253',1,'Joe','Eoj'),(14,'aadmin@test.test','$2y$10$VkLGQjUocrWl4Ibl2fmhlOftF9SJNWX9S0FjLXjitw/H4w5SYpDAa','-',NULL,'Application','Admin'),(15,'js@knights.ucf.edu','$2y$10$DcL0wJ85iv8mkcxlx7jF1ObDR7qZkWXHV3KCs.lOTSLPehySlPE6G','1',8,'John','Smith'),(16,'jdoe@knights.ucf.edu','$2y$10$/D2RFl2AiINa80mI3ym0MOgDoNoH0GUFisawt4xNR9EWm5Pt.8fq2','2222222222',8,'John','Doe'),(17,'janedoe@fit.edu','$2y$10$YIwUqULpVhTW6UcLwg1dOeCdZyQK4N5l2k9qSDYR/HtI80NbfuPja','3333333333',9,'Jane','Doe'),(18,'asand@knights.ucf.edu','$2y$10$YbUpHxl/pDgdoOwSSFeLPed495caaD0Y30GWEEshPlL8DR9wkBBBC','3333333333',8,'Adam','Sandford'),(19,'dc@knights.ucf.edu','$2y$10$3kK.EybGSStNolKLkNx1AO3wIoUekgskr5juNCi7Yb1D5rGagsq2u','4444444444',8,'Dane','Clyde'),(20,'tmyers@knights.ucf.edu','$2y$10$d0J.XnlpGCwBQuslxCCX9u/plsnzn7fOcrh6i747n5tqB/jSJJpWG','5555555555',8,'Twila','Myers'),(21,'tfry@knights.ucf.edu','$2y$10$kEeOdxdHpIDPQTjEyjAHxe8Hc6PEgIYBFwCeOJPzx47z3IqZbLXSa','6666666666',8,'Tristen','Fry'),(22,'lvi@knights.ucf.edu','$2y$10$bB98zVM.GN95oAjDXcA6YuBx/PeIgptfxG0PheICwsu72w3BWNVAe','6666666666',8,'Lauren','Vi'),(23,'rcarter@knights.ucf.edu','$2y$10$P8DVEhcATiliI6XZwJ833e0/pr1EcbR39rGI8PCaQI8sGyiTSYDYC','7777777777',8,'Robin','Carter'),(24,'jblakely@google.com','$2y$10$k/malUriCMZKPamKTPHaBO3BOMxvZWUO/DXm9fOsHE6pDR7376UFq','8888888888',NULL,'James','Blakely'),(25,'jclark@knights.ucf.edu','$2y$10$bG2VoIRMJVIq6wKk02fXKe/dMJ0HTvH5nqw3L8NbAJaerkP0p1JPK','8888888888',8,'Joline','Clark'),(26,'ckent@knights.ucf.edu','$2y$10$ZmUOMjwuavNgLzoJvt4LJOfSpChYAK2M/WTEdOHXDvSf.Qjys4CkW','9999999999',8,'Clark','Kent'),(27,'awonder@knights.ucf.edu','$2y$10$jHhC.9WmKG264SJaukgJz.oOdns6SJ8jE2pO.OizAQrKnIOTGn3/6','9876543211',8,'Alice','Wonder'),(28,'rdavis@fit.edu','$2y$10$DATSYAhEJvg9B4XgVR1dOu4WyFAv5Dl05LuuMjxfMxA1YpWQsR91m','3215559999',9,'Ray','Davis'),(29,'jdavis@fit.edu','$2y$10$yJH1S94PwUHWH99LNVntkOOPRIoIXz8E5YsYB8p5nDSIBx7Pm1P82','7899877897',9,'Jimmy','Davis'),(30,'ddavis@fit.edu','$2y$10$GCh1VpXkeh1sYY3gSITeqOeOTtw1bl9/HpG8ubgS/mElGU5oH89Rq','6544566544',9,'David','Davis'),(31,'ch@fit.edu','$2y$10$uC14.jnmY0m7ZjYFtmCLiO79JpPS2JMAHlNOGjkpPcSLZpINoH4j6','1233211231',9,'Chester','Henson'),(32,'whorton@fit.edu','$2y$10$Fu9r/.YoYmYMt//lRxtOt.8O74eAEwofgK4OvikPTsbzsSuHRp6xq','32112333213',9,'William','Horton');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,4 +278,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-18  2:00:59
+-- Dump completed on 2021-04-18 20:02:39
