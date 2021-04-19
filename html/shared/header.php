@@ -14,30 +14,30 @@ function getName($conn){
 		return "";
 	$sql = "SELECT FirstName,LastName FROM Users WHERE UserID = ?;";
 
-    // prevents the user from entering malicious code into the registration form
-    // prevents code injection
     $stmt = mysqli_stmt_init($conn); // this makes code more secure
 
-    // check for any mistakes before running sql code 
-    if (!mysqli_stmt_prepare($stmt, $sql))
-    {
-        header("location: register.php?error=stmtfailed");
-        exit();
-    }
-    
+    mysqli_stmt_prepare($stmt, $sql);
     mysqli_stmt_bind_param($stmt, "i", $_SESSION["userid"]);
-
     mysqli_stmt_execute($stmt);
-
-    $resultData = mysqli_stmt_get_result($stmt);
-
-    // if theres is info in the data base with this email grab data 
-    // assigns data to var row
-	$row = mysqli_fetch_assoc($resultData);
-	
+	$row = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
     mysqli_stmt_close($stmt);
     
 	return $row["FirstName"]." ".$row["LastName"];
+}
+function getUserInfo($conn){
+	if(!isset($_SESSION["userid"]))
+		return "";
+	$sql = "SELECT * FROM Users WHERE UserID = ?;";
+
+    $stmt = mysqli_stmt_init($conn); // this makes code more secure
+
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $_SESSION["userid"]);
+    mysqli_stmt_execute($stmt);
+	$row = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+    mysqli_stmt_close($stmt);
+    
+	return $row;
 }
 function hasRole($conn, $role){
 	$stmt = mysqli_stmt_init($conn); // this makes code more secure
@@ -84,6 +84,8 @@ if(isset($reqRole) && !hasRole($dbconn, $reqRole)){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="/shared/sea.css">
     <meta name="Description" content="<?php echo $descr ?>">
     <title><?php echo $title ?></title>
