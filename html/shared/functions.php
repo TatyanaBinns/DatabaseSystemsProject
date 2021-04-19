@@ -183,6 +183,7 @@ function loginUser($conn, $email, $password_1)
 
         $_SESSION["userid"] = $userdata["UserID"];
         $_SESSION["fname"] = $userdata["FirstName"];
+        $_SESSION["uniId"] = $userdata["UniversityID"];
 
         header("location: login.php?error=none");
         exit();
