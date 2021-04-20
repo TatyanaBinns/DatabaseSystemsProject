@@ -7,6 +7,26 @@ $dbconn=mysqli_connect($hostname,$username,$password,$db);
 if ($dbconn->connect_error) {
   die("Database connection failed: " . $dbconn->connect_error);
 }
+function hasActiveRSO($conn){
+	$stmt = mysqli_prepare($conn, 
+	'SELECT IF(COUNT(*) > 0, "true", "false") AS hasRole
+	FROM (
+		 SELECT count(*) 
+		 FROM RStudentOrg r
+		 JOIN Membership m 
+		 ON m.OrgID =r.OrgID
+		 WHERE r.AdminUserID = ? 
+		 AND m.Accepted = 1
+		 GROUP BY m.OrgID 
+		 HAVING COUNT(m.MembershipID ) > 4
+	 ) as Other;');
+	mysqli_stmt_bind_param($stmt, "i", $_SESSION["userid"]);
+	mysqli_stmt_execute($stmt);
+	$row = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+	mysqli_stmt_close($stmt);
+	return $row["hasRole"] == "true";
+}
+
 function hasRole($conn, $role){
 	$stmt = mysqli_stmt_init($conn); // this makes code more secure
 	switch($role){

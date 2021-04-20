@@ -41,7 +41,7 @@ if (isset($_POST["actionType"]) && ($_POST["actionType"] == "createEvent"))
 		res("badloc");
 
     
-	if(hasRole($dbconn, "Admin")){
+	if(hasActiveRSO($dbconn)){
 		$sql = "INSERT INTO SchoolEventApp.Events
 				(EventVisibility, Published, Category, Name, CreatorUserID, UniversityID, OrgID, ContactName, ContactPhoneNumber, ContactEmailAddr, LatLon, AddressDesc, Scheduled, Description)
 				VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, POINT(?, ?), ?, ?, ?);";
