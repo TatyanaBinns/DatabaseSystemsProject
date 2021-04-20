@@ -1,6 +1,7 @@
 <?php
 $title="Events - Login";
 $descr="Events Login Page";
+$navitem=""
 include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
 ?>
 <div class="container col-md-4 text-center">
