@@ -30,24 +30,32 @@ include $_SERVER['DOCUMENT_ROOT'].'/shared/header.php';
 			<option value="Public">Public Event - Open to All</option>
 			<option value="Private">Private Event - University Specific</option>
 			<?php
-			if(hasRole($dbconn, "Admin"))
+			if(hasActiveRSO($dbconn))
 				echo '<option value="RSO">RSO Event - Registered Student Organization Only</option>';
 			?>
 		</select>
 		<?php
-			if(hasRole($dbconn, "Admin")){
+			if(hasActiveRSO($dbconn)){
 				echo '<select class="form-control" id="orgID" name="orgID" required>';
 				$stmt = mysqli_stmt_init($dbconn);
 				mysqli_stmt_prepare($stmt, 
 				   "SELECT r.OrgID, r.Name
 					FROM RStudentOrg r
-					WHERE r.AdminUserID = ?;");
+					JOIN Membership m 
+					ON m.OrgID =r.OrgID
+					WHERE r.AdminUserID = 18 
+					AND m.Accepted = 1
+					GROUP BY m.OrgID 
+					HAVING COUNT(m.MembershipID ) > 4;");
 				mysqli_stmt_bind_param($stmt, "i", $_SESSION["userid"]);
 				mysqli_stmt_execute($stmt);
-				while ($row = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt)))
+				$data=mysqli_stmt_get_result($stmt);
+				while ($row = mysqli_fetch_assoc($data))
 					echo '<option value='.$row['OrgID'].'>'.$row['Name'].'</option>';
 				echo '</select>';
-			}else
+			}else if (hasRole($dbconn, "Admin"))
+				echo "<div>Note, you do not have an active (having 5 or more users) RSO, and so cannot create RSO events.</div>";
+			else
 				echo "<div>Note, as you are not an RSO admin, your event will require approval.</div>";	
 		?>
 <?php writeInput("name", "Event Name", "name", "text", "sea-square-top"); ?>
