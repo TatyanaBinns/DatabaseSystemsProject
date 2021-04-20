@@ -85,6 +85,8 @@ if(isset($reqRole) && !hasRole($dbconn, $reqRole)){
 			echo '</div>';
 			
 			echo '<div class="btn-group mr-2">';
+			if(hasRole($dbconn, "Admin"))
+				echo "<a class='btn btn-outline-secondary sea-enboldener' href='/manage_rso.php'>Manage RSO</a>";
 			if(hasRole($dbconn, "ApplicationAdmin")){
 				echo "<a class='btn btn-outline-secondary sea-enboldener' href='/manage_university.php'>Manage Universities</a>";
 				echo "<a class='btn btn-outline-secondary sea-enboldener' href='/manage_users.php'>Manage Users</a>";
