@@ -49,7 +49,7 @@ if (isset($_POST["actionType"]) && ($_POST["actionType"] == "createEvent"))
 		if(!mysqli_stmt_prepare($stmt, $sql))
 			res("internalerror");
 		
-		$pub = hasRole($dbconn, "Admin");
+		$pub = 1;
 		
 		mysqli_stmt_bind_param($stmt, "sissiiisssddsss", $eventVisibility, $pub, $category, $name, $_SESSION['userid'], $_SESSION['uniId'], $orgId, $contactName, $contactPhone, $contactEmail, $lat, $long, $addrDesc, $datetime, $description);
 	}else{
@@ -60,7 +60,7 @@ if (isset($_POST["actionType"]) && ($_POST["actionType"] == "createEvent"))
 		if(!mysqli_stmt_prepare($stmt, $sql))
 			res("internalerror");
 		
-		$pub = hasRole($dbconn, "Admin");
+		$pub = 0;
 		
 		mysqli_stmt_bind_param($stmt, "sissiisssddsss", $eventVisibility, $pub, $category, $name, $_SESSION['userid'], $_SESSION['uniId'], $contactName, $contactPhone, $contactEmail, $lat, $long, $addrDesc, $datetime, $description);
 	}
