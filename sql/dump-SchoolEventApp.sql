@@ -66,15 +66,16 @@ CREATE TABLE `Events` (
   `ContactEmailAddr` varchar(100) DEFAULT NULL,
   `LatLon` point DEFAULT NULL,
   `AddressDesc` varchar(100) DEFAULT NULL,
-  `Created` datetime DEFAULT NULL,
+  `Created` datetime DEFAULT CURRENT_TIMESTAMP,
   `Scheduled` datetime DEFAULT NULL,
+  `Description` text,
   PRIMARY KEY (`EventID`),
   KEY `Events_FK` (`CreatorUserID`),
   KEY `Events_FK_1` (`UniversityID`),
   KEY `Events_FK_2` (`OrgID`),
   CONSTRAINT `Events_FK` FOREIGN KEY (`CreatorUserID`) REFERENCES `Users` (`UserID`),
   CONSTRAINT `Events_FK_1` FOREIGN KEY (`UniversityID`) REFERENCES `University` (`UniversityID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,7 +84,7 @@ CREATE TABLE `Events` (
 
 LOCK TABLES `Events` WRITE;
 /*!40000 ALTER TABLE `Events` DISABLE KEYS */;
-INSERT INTO `Events` VALUES (1,'Public',1,'TestCategory','Ice Fishing',2,1,NULL,'Ted Testie','(555) 867-5309','ted@brrr.edu','\0\0\0\0\0\0\0±’œâ¿ÆS¿,¯	E≥cF¿','You\'ll see the hut!','2021-04-14 05:49:26','2021-04-21 05:49:26');
+INSERT INTO `Events` VALUES (4,'Public',1,'fundraising','5k Run',17,9,NULL,'Jane Doe','3333333333','janedoe@fit.edu','\0\0\0\0\0\0\0¿xAù<@ﬁâ¶‰∂\'T¿','Meet out front of the Athletic Field!','2021-04-19 02:55:11','2021-05-02 14:00:00','A fun event for the whole family! Bring your water!\r\nThis event is raising money for the turtles!'),(5,'Public',1,'academic','Spring 2021 Commencement',17,9,NULL,'Jane Doe','3333333333','janedoe@fit.edu','\0\0\0\0\0\0\0Õ%Ë;<@\0Y=ÿ\'T¿','Meet at the Clemente Center ','2021-04-19 03:08:34','2021-05-07 13:00:00','Celebrate Spring 2021 graduates'),(6,'Private',1,'social','Paddleboarding 101 ',17,9,NULL,'Jane Doe','3333333333','janedoe@fit.edu','\0\0\0\0\0\0\0AY°äcõ<@B@úGMT¿','Lake Claire','2021-04-19 03:10:56','2021-04-19 09:00:00','Try Paddleboarding!'),(7,'Private',1,'social','Kayaking',20,8,NULL,'Twila Myers','5555555555','tmyers@knights.ucf.edu','\0\0\0\0\0\0\0;˘wKwõ<@B@úß\0MT¿','Lake Claire','2021-04-19 03:15:57','2021-04-19 09:00:00','Try Kayaking!'),(8,'Public',1,'academic','Career Lab',20,8,NULL,'Twila Myers','5555555555','tmyers@knights.ucf.edu','\0\0\0\0\0\0\0®êÁö;ö<@_∏Ÿ”LT¿','Union Center','2021-04-19 03:23:23','2021-04-21 15:00:00','Contact Career Lab in Union Center for career help.'),(9,'Public',1,'social ','Earth Day Hike ',20,8,NULL,'Twila Myers','5555555555','tmyers@knights.ucf.edu','\0\0\0\0\0\0\0≠é¬¬ô<@ÂT-LT¿','UCF Arboretum','2021-04-19 03:26:46','2021-04-22 09:00:00','Take a stroll in the arboretum'),(10,'Private',1,'social','Yoga Under the Stars',20,8,NULL,'Twila Myers','5555555555','tmyers@knights.ucf.edu','\0\0\0\0\0\0\06Bj}ìô<@Aâ´√ÈLT¿','Library','2021-04-19 03:30:19','2021-04-24 22:00:00','Try yoga under the stars! Meet in front of the library'),(11,'Public',1,'academic','Book Club',26,8,NULL,'Clark Kent','9999999999','ckent@knights.ucf.edu','\0\0\0\0\0\0\0ù∂_£ô<@B@úá‰LT¿','John C. Hitt Library','2021-04-19 03:37:44','2021-04-21 15:30:00','Look over books together.'),(12,'Public',1,'academic','Nailing the Interview',26,8,NULL,'Clark Kent','9999999999','ckent@knights.ucf.edu','\0\0\0\0\0\0\0ª%ö<@B@úß”LT¿','Union Center','2021-04-19 03:39:45','2021-04-28 17:30:00','Come to room 222 to find out how to nail that interview!'),(13,'Public',0,'recruitment','Anime Club Recruitment',15,8,NULL,'John Smith','1','js@knights.ucf.edu','\0\0\0\0\0\0\0—·UÙ\rö<@øµÉJ›LT¿','The student union building, near panda express','2021-04-19 22:47:20','2021-05-29 17:00:00','A meet and greet to get interest for starting up a new student organization!'),(14,'Private',1,'social','Paper Airplane Building Social',15,8,NULL,'John Smith','1','js@knights.ucf.edu','\0\0\0\0\0\0\0àtdõ<@á2§sˆLT¿','Park near Lake Claire','2021-04-19 22:58:57','2021-05-08 09:00:00','A fun event to go to!'),(15,'Private',1,'social','Second Paper Airplane Building Social',15,8,NULL,'John Smith','1','js@knights.ucf.edu','\0\0\0\0\0\0\0çÆ&’Çõ<@˜|˙êMT¿','Park near Lake Claire','2021-04-19 23:01:10','2021-05-22 09:00:00','The second round!'),(16,'Private',1,'social','Third Paper Airplane Building Social',15,8,NULL,'John Smith','1','js@knights.ucf.edu','\0\0\0\0\0\0\0}Ø€\ZÄõ<@‰†BMT¿','Park near Lake Claire','2021-04-19 23:02:07','2021-05-29 09:00:00','The third round!'),(17,'Private',1,'social','Fourth Paper Airplane Building Social',15,8,NULL,'John Smith','1','js@knights.ucf.edu','\0\0\0\0\0\0\0 Îdáõ<@∫à@MT¿','Park near Lake Claire','2021-04-19 23:04:33','2021-05-29 09:00:00','The fourth round!');
 /*!40000 ALTER TABLE `Events` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,9 +126,9 @@ DROP TABLE IF EXISTS `RStudentOrg`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `RStudentOrg` (
   `OrgID` int(11) NOT NULL AUTO_INCREMENT,
-  `AdminUserID` int(11) DEFAULT NULL,
-  `UniversityID` int(11) DEFAULT NULL,
-  `Name` varchar(100) DEFAULT NULL,
+  `AdminUserID` int(11) NOT NULL,
+  `UniversityID` int(11) NOT NULL,
+  `Name` varchar(100) NOT NULL,
   `Description` varchar(900) DEFAULT NULL,
   PRIMARY KEY (`OrgID`),
   KEY `RStudentOrg_FK` (`AdminUserID`),
@@ -230,7 +231,7 @@ CREATE TABLE `University` (
 
 LOCK TABLES `University` WRITE;
 /*!40000 ALTER TABLE `University` DISABLE KEYS */;
-INSERT INTO `University` VALUES (1,'Example University','\0\0\0\0\0\0\0=dH.ŒÀS¿ê∏≤´H¿','A great place to live!','brrr.edu',13),(8,'University of Central Florida','\0\0\0\0\0\0\0`º%ö<@b@úß”LT¿','test','knights.ucf.edu',16),(9,'Florida Tech','\0\0\0\0\0\0\0UÙz‘ú<@ƒÄÎÌ‚\'T¿','A private school','fit.edu',17);
+INSERT INTO `University` VALUES (1,'Example University','\0\0\0\0\0\0\0=dH.ŒÀS¿ê∏≤´H¿','A great place to live!','brrr.edu',13),(8,'University of Central Florida','\0\0\0\0\0\0\0`º%ö<@b@úß”LT¿','test','knights.ucf.edu',16),(9,'Florida Tech','\0\0\0\0\0\0\0UÙz‘ú<@ƒÄÎÌ‚\'T¿','A private school','fit.edu',28);
 /*!40000 ALTER TABLE `University` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-18 20:02:39
+-- Dump completed on 2021-04-19 21:07:24
